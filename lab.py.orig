@@ -58,7 +58,48 @@ class PasswordDatabase:
 
 
 
+
 <<<<<<< HEAD
+
+
+        import random
+import string
+
+class PasswordGenerator:
+    def _init_(self):
+        self.length = 12
+        self.include_uppercase = True
+        self.include_lowercase = True
+        self.include_digits = True
+        self.include_special = True
+
+    def generate(self):
+        characters = ""
+        if self.include_uppercase:
+            characters += string.ascii_uppercase
+        if self.include_lowercase:
+            characters += string.ascii_lowercase
+        if self.include_digits:
+            characters += string.digits
+        if self.include_special:
+            characters += "!@#$%^&*()-_+="
+
+        if not characters:
+            raise ValueError("No character sets selected for password generation.")
+
+        return ''.join(random.choice(characters) for _ in range(self.length))
+
+    def set_length(self, length):
+        if length < 6:
+            raise ValueError("Password length must be at least 6 characters.")
+        self.length = length
+
+    def configure(self, upper=True, lower=True, digits=True, special=True):
+        self.include_uppercase = upper
+        self.include_lowercase = lower
+        self.include_digits = digits
+        self.include_special = special
+=======
         import tkinter as tk
 from tkinter import messagebox, simpledialog
 from database import PasswordDatabase
@@ -100,7 +141,7 @@ class PasswordManagerApp:
         tk.Checkbutton(self.master, text="Lowercase", variable=self.lower_var).grid(row=3, column=1)
         tk.Checkbutton(self.master, text="Digits", variable=self.digit_var).grid(row=4, column=0)
         tk.Checkbutton(self.master, text="Special", variable=self.special_var).grid(row=4, column=1)
-=======
+
 
   def update_password(self):
         if not hasattr(self, 'selected_id') or self.selected_id is None:
@@ -232,5 +273,6 @@ if _name_ == "_main_":
         except:
             self.selected_id = None
 
->>>>>>> D
 
+
+>>>>>>> B
