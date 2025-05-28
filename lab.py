@@ -52,3 +52,47 @@ class PasswordDatabase:
 
     def close(self):
         self.connection.close()
+
+
+
+
+
+
+
+        import random
+import string
+
+class PasswordGenerator:
+    def _init_(self):
+        self.length = 12
+        self.include_uppercase = True
+        self.include_lowercase = True
+        self.include_digits = True
+        self.include_special = True
+
+    def generate(self):
+        characters = ""
+        if self.include_uppercase:
+            characters += string.ascii_uppercase
+        if self.include_lowercase:
+            characters += string.ascii_lowercase
+        if self.include_digits:
+            characters += string.digits
+        if self.include_special:
+            characters += "!@#$%^&*()-_+="
+
+        if not characters:
+            raise ValueError("No character sets selected for password generation.")
+
+        return ''.join(random.choice(characters) for _ in range(self.length))
+
+    def set_length(self, length):
+        if length < 6:
+            raise ValueError("Password length must be at least 6 characters.")
+        self.length = length
+
+    def configure(self, upper=True, lower=True, digits=True, special=True):
+        self.include_uppercase = upper
+        self.include_lowercase = lower
+        self.include_digits = digits
+        self.include_special = special
