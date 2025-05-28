@@ -52,3 +52,65 @@ class PasswordDatabase:
 
     def close(self):
         self.connection.close()
+
+
+
+
+  def update_password(self):
+        if not hasattr(self, 'selected_id') or self.selected_id is None:
+            messagebox.showwarning("Warning", "Please select a password to update.")
+            return
+
+        new_password = simpledialog.askstring("Update", "Enter new password:")
+        if new_password:
+            self.db.update_password(self.selected_id, new_password)
+            messagebox.showinfo("Updated", "Password updated successfully.")
+            self.view_all_passwords()
+
+    def delete_password(self):
+        if not hasattr(self, 'selected_id') or self.selected_id is None:
+            messagebox.showwarning("Warning", "Please select a password to delete.")
+            return
+
+        confirm = messagebox.askyesno("Confirm", "Are you sure you want to delete this password?")
+        if confirm:
+            self.db.delete_password(self.selected_id)
+            messagebox.showinfo("Deleted", "Password deleted.")
+            self.view_all_passwords()
+
+
+
+
+  def update_password(self):
+        if not hasattr(self, 'selected_id') or self.selected_id is None:
+            messagebox.showwarning("Warning", "Please select a password to update.")
+            return
+
+        new_password = simpledialog.askstring("Update", "Enter new password:")
+        if new_password:
+            self.db.update_password(self.selected_id, new_password)
+            messagebox.showinfo("Updated", "Password updated successfully.")
+            self.view_all_passwords()
+
+    def delete_password(self):
+        if not hasattr(self, 'selected_id') or self.selected_id is None:
+            messagebox.showwarning("Warning", "Please select a password to delete.")
+            return
+
+        confirm = messagebox.askyesno("Confirm", "Are you sure you want to delete this password?")
+        if confirm:
+            self.db.delete_password(self.selected_id)
+            messagebox.showinfo("Deleted", "Password deleted.")
+            self.view_all_passwords()
+
+
+            import tkinter as tk
+from ui import PasswordManagerApp
+
+if _name_ == "_main_":
+    root = tk.Tk()
+    app = PasswordManagerApp(root)
+    root.mainloop()
+        
+
+
